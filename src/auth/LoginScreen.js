@@ -1,16 +1,22 @@
 // react router dom
 import { Link } from "react-router-dom";
+// yarn add validator
+import validator from "validator";
 // hook
 import { useForm } from "../hooks/useForm";
 // redux
-import { useDispatch } from "react-redux";
-// action - dispatch
+import { useDispatch, useSelector } from "react-redux";
+// action - auth  
 import { startLoginEmailPassword, startGoogleLogin } from "../actions/auth";
+// action - messages
+import { setError,removeError } from "../actions/messages";
 
 // COMPONENT
 export const LoginScreen = () => {
   // redux
   const dispatch = useDispatch();
+  // redux - desestructuramos msgError del state messages
+  const { msgError } = useSelector(state => state.messages);
   // hook
   const [formValues, handleInputChange] = useForm({
     email: "jrg@gmail.com",
@@ -22,12 +28,31 @@ export const LoginScreen = () => {
   const handleLogin = e => {
     e.preventDefault();
     //console.log(email, password);
-    dispatch(startLoginEmailPassword(email, password));
+    //console.log(email, password);
+    if (isFormValid()) {
+      dispatch(startLoginEmailPassword(email, password));
+    }
   };
   // funcion para realizar el login con google
   const handleGoogleLogin = () => {
-    dispatch( startGoogleLogin() )
-  }
+    dispatch(startGoogleLogin());
+  };
+  // funcion para validar los campos del formulario
+  const isFormValid = () => {
+    if(email === ""){
+      dispatch(setError("El email es obligatorio"));
+      return false;
+    }
+    else if (!validator.isEmail(email)) {
+      dispatch(setError("El email no es valido"));
+      return false;
+    } else if (password === "") {
+      dispatch(setError("Es necesario poner el password"));
+      return false;
+    }
+    dispatch(removeError());
+    return true;
+  };
 
   return (
     <>
@@ -35,6 +60,7 @@ export const LoginScreen = () => {
 
       <form onSubmit={handleLogin}>
         {/* Mensaje de error */}
+        {msgError && <div className="auth__alert--error">{msgError}</div>}
 
         <input
           type="text"

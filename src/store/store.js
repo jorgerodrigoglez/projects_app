@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk';
 // reducer
 import { authReducer } from "../reducers/authReducer";
+import { messagesReducer } from "../reducers/messagesReducer";
 
 // para hacer peticiones sincronas es necesario este middleware
 const composeEnhancers =
@@ -14,7 +15,8 @@ const composeEnhancers =
 
 // reducers de store
 const reducers = combineReducers({
-  auth: authReducer
+  auth: authReducer,
+  messages: messagesReducer
 });
 
 // exportacion del store
