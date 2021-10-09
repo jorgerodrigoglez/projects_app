@@ -1,3 +1,13 @@
-body{
-    background-color: red;
-}
+//THEME
+@import "theme/vars";
+@import "theme/base";
+
+//CONFIG
+@import "config/functions";
+@import "config/mixins";
+@import "config/placeholders";
+
+
+//COMPONENTS
+@import "components/auth";
+@import "components/buttons";
