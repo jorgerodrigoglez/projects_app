@@ -1,13 +1,37 @@
 // react router dom
 import { Link } from "react-router-dom";
+// hook
+import { useForm } from "../hooks/useForm";
+// redux 
+import{ useDispatch } from "react-redux";
+// action - dispatch
+import { login } from "../actions/auth";
+
 
 // COMPONENT
 export const LoginScreen = () => {
+  // redux
+  const dispatch = useDispatch();
+  // hook
+  const [ formValues, handleInputChange ] = useForm({
+    email: "jrg@gmail.com",
+    password: "123456"
+  });
+  // desestructuramos el objeto que retorna el hook
+  const { email, password } = formValues;
+  // funcion para el login
+  const handleLogin = (e) => {
+    e.preventDefault();
+    //console.log(email, password);
+    dispatch( login ( 3454323, 'Jorge RG'));
+
+  }
+
   return (
     <>
       <h3 className="auth__title">Login</h3>
 
-      <form>
+      <form onSubmit={handleLogin}>
         {/* Mensaje de error */}
 
         <input
@@ -16,12 +40,16 @@ export const LoginScreen = () => {
           name="email"
           className="auth__input"
           autoComplete="off"
+          value={email}
+          onChange={handleInputChange}
         />
         <input
           type="password"
           placeholder="Password"
           name="password"
           className="auth__input"
+          value={password}
+          onChange={handleInputChange}
         />
         <button
           type="submit"
