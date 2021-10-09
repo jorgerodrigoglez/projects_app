@@ -2,29 +2,31 @@
 import { Link } from "react-router-dom";
 // hook
 import { useForm } from "../hooks/useForm";
-// redux 
-import{ useDispatch } from "react-redux";
+// redux
+import { useDispatch } from "react-redux";
 // action - dispatch
-import { login } from "../actions/auth";
-
+import { startLoginEmailPassword, startGoogleLogin } from "../actions/auth";
 
 // COMPONENT
 export const LoginScreen = () => {
   // redux
   const dispatch = useDispatch();
   // hook
-  const [ formValues, handleInputChange ] = useForm({
+  const [formValues, handleInputChange] = useForm({
     email: "jrg@gmail.com",
     password: "123456"
   });
   // desestructuramos el objeto que retorna el hook
   const { email, password } = formValues;
-  // funcion para el login
-  const handleLogin = (e) => {
+  // funcion para hacer el login con email y password
+  const handleLogin = e => {
     e.preventDefault();
     //console.log(email, password);
-    dispatch( login ( 3454323, 'Jorge RG'));
-
+    dispatch(startLoginEmailPassword(email, password));
+  };
+  // funcion para realizar el login con google
+  const handleGoogleLogin = () => {
+    dispatch( startGoogleLogin() )
   }
 
   return (
@@ -62,7 +64,7 @@ export const LoginScreen = () => {
         <div className="auth__social--networks">
           <p>Login with social networks</p>
           {/* btn google */}
-          <div className="google-btn">
+          <div className="google-btn" onClick={handleGoogleLogin}>
             <div className="google-icon-wrapper">
               <img
                 className="google-icon"
