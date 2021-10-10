@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 // react router dom
 import {
   BrowserRouter as Router,
-  Route,
   Switch,
   Redirect
 } from "react-router-dom";
@@ -15,6 +14,9 @@ import { AuthRouter } from "./AuthRouter";
 import { ProjectsScreen } from "../projects/ProjectsScreen";
 // action auth
 import { login } from "../actions/auth";
+// routes
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
 
 // COMPONENT
 export const AppRouter = () => {
@@ -55,8 +57,17 @@ export const AppRouter = () => {
     <Router>
       <div>
         <Switch>
-          <Route path="/auth" component={AuthRouter} />
-          <Route exact path="/" component={ProjectsScreen} />
+          <PublicRoute
+            path="/auth"
+            component={AuthRouter}
+            isAuthenticated={isLoggedIn}
+          />
+          <PrivateRoute
+            exact
+            path="/"
+            component={ProjectsScreen}
+            isAuthenticated={isLoggedIn}
+          />
           <Redirect to="/auth/login" />
         </Switch>
       </div>

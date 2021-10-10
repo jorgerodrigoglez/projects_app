@@ -1,5 +1,7 @@
 // types
 import { types } from "../types/types";
+// para mostrar alertar de error - npm install sweetalert2
+import Swal from 'sweetalert2';
 // firebase
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 // actions messages
@@ -30,6 +32,9 @@ export const startRegisterWithEmailPasswordName = (name, email, password) => {
         console.log(err);
         // action messages loading
         dispatch(finishLoading());
+        // muestra mensaje de error de bbdd firebase
+        // texto - mensaje - icono
+        Swal.fire('Error', err.message, 'error');
       });
   };
 };
@@ -53,6 +58,9 @@ export const startLoginEmailPassword = (email, password) => {
         console.log(err);
         // action messges loading
         dispatch(finishLoading());
+        // muestra mensaje de error de bbdd firebase
+        // texto - mensaje - icono
+        Swal.fire('Error', err.message, 'error');
       });
   };
 };
