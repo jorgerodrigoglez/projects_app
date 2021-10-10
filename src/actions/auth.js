@@ -1,6 +1,9 @@
 // types
 import { types } from "../types/types";
+// firebase
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
+// actions messages
+import { startLoading, finishLoading } from "./messages";
 
 /* dispatch se encarga de enviar la respectiva accion los reducers y como los nombres de los types son únicos solo hay un reducer que va a ejecutar esa acción */
 
@@ -8,6 +11,8 @@ import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 // action login con email y password firebase
 export const startRegisterWithEmailPasswordName = (name, email, password) => {
   return dispatch => {
+    // action messages loading
+    dispatch(startLoading());
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -18,9 +23,13 @@ export const startRegisterWithEmailPasswordName = (name, email, password) => {
         //console.log(user);
         //llamamos a la funcion login para enviar los datos al reducer y hacer el login
         dispatch(login(user.uid, user.displayName));
+        // action messages loading
+        dispatch(finishLoading());
       })
       .catch(err => {
         console.log(err);
+        // action messages loading
+        dispatch(finishLoading());
       });
   };
 };
@@ -28,6 +37,8 @@ export const startRegisterWithEmailPasswordName = (name, email, password) => {
 /**** LOGIN USUARIOS*/
 export const startLoginEmailPassword = (email, password) => {
   return dispatch => {
+    // action messages loading
+    dispatch(startLoading());
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -35,9 +46,13 @@ export const startLoginEmailPassword = (email, password) => {
         //console.log(user);
         //llamamos a la funcion login para enviar los datos al reducer
         dispatch(login(user.uid, user.displayName));
+        // action messages loading
+        dispatch(finishLoading());
       })
       .catch(err => {
         console.log(err);
+        // action messges loading
+        dispatch(finishLoading());
       });
   };
 };
@@ -65,4 +80,16 @@ export const login = (uid, displayName) => ({
     uid,
     displayName
   }
+});
+
+/****** LOGOUT */
+export const startLogout = () => {
+  return async dispatch => {
+    await firebase.auth().signOut();
+    dispatch(logout());
+  };
+};
+// logout reducer
+export const logout = () => ({
+  type: types.logout
 });

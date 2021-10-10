@@ -16,7 +16,7 @@ export const LoginScreen = () => {
   // redux
   const dispatch = useDispatch();
   // redux - desestructuramos msgError del state messages
-  const { msgError } = useSelector(state => state.messages);
+  const { msgError, loading } = useSelector(state => state.messages);
   // hook
   const [formValues, handleInputChange] = useForm({
     email: "jrg@gmail.com",
@@ -27,7 +27,6 @@ export const LoginScreen = () => {
   // funcion para hacer el login con email y password
   const handleLogin = e => {
     e.preventDefault();
-    //console.log(email, password);
     //console.log(email, password);
     if (isFormValid()) {
       dispatch(startLoginEmailPassword(email, password));
@@ -82,7 +81,8 @@ export const LoginScreen = () => {
         <button
           type="submit"
           className="btn btn-primary btn-block"
-          // del loading del state ui
+          // loading del state messages
+          disabled={loading}
         >
           Login
         </button>

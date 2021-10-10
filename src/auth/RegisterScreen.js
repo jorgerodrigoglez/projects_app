@@ -17,7 +17,7 @@ export const RegisterScreen = () => {
   // redux
   const dispatch = useDispatch();
   // redux - desestructuramos msgError del state messages
-  const { msgError } = useSelector(state => state.messages);
+  const { msgError, loading} = useSelector(state => state.messages);
   // hook
   const [formValues, handleInputChange] = useForm({
     name: "Jorge",
@@ -100,7 +100,8 @@ export const RegisterScreen = () => {
         <button
           type="submit"
           className="btn btn-primary btn-block"
-          // del loading del state ui
+          // loading del state message
+          disabled={loading}
         >
           Register
         </button>
