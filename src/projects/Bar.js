@@ -13,11 +13,11 @@ export const Bar = () => {
     dispatch(startLogout());
   };
   return (
-    <div>
-        <h3>
-          <span> {name}</span>
-        </h3>
-      <button className="btn btn--black" onClick={handleLogout}>
+    <div className="bar">
+      <h3 className="bar__title">
+        <span className="bar__title__name"> Bienvenido: {name}</span>
+      </h3>
+      <button className="btn" onClick={handleLogout}>
         Cerrar sesión
       </button>
     </div>

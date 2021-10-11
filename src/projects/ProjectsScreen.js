@@ -1,11 +1,19 @@
 import { Bar } from "./Bar";
+// component
+import SidebarLeft from "./SidebarLeft";
+import NothingSelected from "./elements/NothingSelected";
+// element
 
 // COMPONENT
 export const ProjectsScreen = () => {
-    return (
-        <div>
-            <Bar/>
-            <h1>Projects Screen</h1>
-        </div>
-    )
-}
+  return (
+    <>
+      <Bar />
+
+      <div className="main__content__app">
+        <SidebarLeft />
+        <NothingSelected />
+      </div>
+    </>
+  );
+};

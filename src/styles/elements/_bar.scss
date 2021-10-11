@@ -1,0 +1,20 @@
+.bar{
+    padding: $baselineheight;
+    margin-bottom: $baselineheight / 2;
+    background-color: $primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 2px $black;
+
+    &__title{
+        margin-left: $gutterwidth;
+        font-family: $basefont;
+        font-size: fs(small);
+        color: $white;
+
+        &__name{
+            text-decoration: underline;
+        }
+    }
+}

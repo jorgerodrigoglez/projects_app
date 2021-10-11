@@ -3,9 +3,10 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 // npm install --save redux-thunk
 // redux-thunk : hace que las acciones que ejecutemos sean asincronos por medio de un middleware que actua entre las acciones y los reducers cuando se ejecutan los dispatchers
 import thunk from 'redux-thunk';
-// reducer
+// reducers
 import { authReducer } from "../reducers/authReducer";
 import { messagesReducer } from "../reducers/messagesReducer";
+import { projectsReducer } from "../reducers/projectsReducer";
 
 // para hacer peticiones sincronas es necesario este middleware
 const composeEnhancers =
@@ -16,7 +17,8 @@ const composeEnhancers =
 // reducers de store
 const reducers = combineReducers({
   auth: authReducer,
-  messages: messagesReducer
+  messages: messagesReducer,
+  projects: projectsReducer,
 });
 
 // exportacion del store

@@ -7,6 +7,12 @@
 @import "config/mixins";
 @import "config/placeholders";
 
+//LAYOUT
+@import "layout/main-layout";
+
+//ELEMENTS
+@import "elements/bar";
+@import "elements/sidebar-left";
 
 //COMPONENTS
 @import "components/auth";
