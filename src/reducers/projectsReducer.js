@@ -8,6 +8,11 @@ const initialState = {
 
 export const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.projectAddNew:
+      return {
+        ...state,
+        projects: [action.payload, ...state.projects]
+      };
     case types.projectActive:
       return {
         ...state,
@@ -15,27 +20,27 @@ export const projectsReducer = (state = initialState, action) => {
           ...action.payload
         }
       };
-    case types.projectAddNew:
+    /*case types.projectAddNew:
       return {
         ...state,
-        notes: [action.payload, ...state.notes]
-      };
-    case types.projectLoad:
+        projects: [action.payload, ...state.projects]
+      };*/
+    case types.projectsLoad:
       // da error - action.payload is not iterable
       // console.log(action.payload) -- retorna una promesa
-      // solucion - hacer asincrona la funcion que devuelve los proyectos(helper) - const projects = await projectNotes( user.uid ); en appRouter con su async en la funcion
+      // solucion - hacer asincrona la funcion que devuelve los proyectos(helper) - const projects = await loadProjects( user.uid ); en appRouter con su async en la funcion
       return {
         ...state,
-        notes: [...action.payload]
+        projects: [...action.payload]
       };
-    case types.projectUpdated:
+    /*case types.projectUpdated:
       return {
         ...state,
-        notes: state.notes.map(note =>
-          note.id === action.payload.id ? action.payload.note : note
+        projects: state.projects.map(note =>
+          project.id === action.payload.id ? action.payload.project : project
         )
-      };
-   
+      };*/
+
     default:
       return state;
   }

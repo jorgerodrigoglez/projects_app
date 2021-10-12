@@ -1,18 +1,24 @@
-import { Bar } from "./Bar";
+// redux
+import { useSelector } from "react-redux";
 // component
+import { Bar } from "./Bar";
 import SidebarLeft from "./SidebarLeft";
-import NothingSelected from "./elements/NothingSelected";
 // element
+import NothingSelected from "./elements/NothingSelected";
+import { ProjectSelectedScreen } from "./elements/ProjectSelectedScreen";
 
 // COMPONENT
 export const ProjectsScreen = () => {
+  // redux
+  const { active } = useSelector(state => state.projects);
+
   return (
     <>
       <Bar />
 
       <div className="main__content__app">
         <SidebarLeft />
-        <NothingSelected />
+        {active ? <ProjectSelectedScreen /> : <NothingSelected />}
       </div>
     </>
   );
