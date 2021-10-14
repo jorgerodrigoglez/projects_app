@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 // comppnents
 import { AuthRouter } from "./AuthRouter";
-import { ProjectsScreen } from "../projects/ProjectsScreen";
+import { ProjectsScreen } from "../projects_app/ProjectsScreen";
 // action auth
 import { login } from "../actions/auth";
 // routes

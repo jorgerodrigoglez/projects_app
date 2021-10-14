@@ -1,0 +1,31 @@
+.form__task{
+    @extend %center;
+    padding: $baselineheight;
+    width: 95%;
+    background-color: $light;
+    text-align: center;
+    &--input{
+        border: none;
+        border: solid 1px $grey;
+        @extend %center;
+        padding: $baselineheight * 1.5;
+        background-color: $light;
+        width: 90%;
+        font-size: fs(normal);
+        font-family: $basefont;
+    }
+    &--btn{
+        margin-top: $gutterwidth;
+        width: 100%;
+        text-align: center;
+        
+        button{
+            width: 25%;
+            padding: $baselineheight;
+            background-color: $primary;
+            font-family: $altfont;
+            font-size: fs(small) * 1.25;
+            border-radius: $radius;
+        }
+    }
+}

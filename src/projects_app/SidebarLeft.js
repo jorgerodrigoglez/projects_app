@@ -1,13 +1,9 @@
-
 // elements
-import FormProject from "./elements/FormProject";
-import Projects from "./elements/Projects";
+import Projects from "./elements/projects/Projects";
 
 const SidebarLeft = () => {
   return (
     <aside className="project__sidebar--left">
-      <FormProject />
-
       <Projects />
     </aside>
   );

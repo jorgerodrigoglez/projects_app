@@ -10,4 +10,5 @@ export const types = {
     projectAddNew: '[Project] Añadir nuevo proyectos (al sidebar)',
     projectActive: '[Project] Establecer proyecto como activo',
     projectsLoad: '[Project] Cargar proyectos (al sidebar)',
+    projectUpdated: '[Project] Modificar datos del proyecto guardado',
 }

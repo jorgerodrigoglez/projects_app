@@ -8,11 +8,6 @@ const initialState = {
 
 export const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.projectAddNew:
-      return {
-        ...state,
-        projects: [action.payload, ...state.projects]
-      };
     case types.projectActive:
       return {
         ...state,
@@ -20,11 +15,11 @@ export const projectsReducer = (state = initialState, action) => {
           ...action.payload
         }
       };
-    /*case types.projectAddNew:
+    case types.projectAddNew:
       return {
         ...state,
         projects: [action.payload, ...state.projects]
-      };*/
+      };
     case types.projectsLoad:
       // da error - action.payload is not iterable
       // console.log(action.payload) -- retorna una promesa
@@ -33,13 +28,13 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         projects: [...action.payload]
       };
-    /*case types.projectUpdated:
+    case types.projectUpdated:
       return {
         ...state,
-        projects: state.projects.map(note =>
+        projects: state.projects.map(project =>
           project.id === action.payload.id ? action.payload.project : project
         )
-      };*/
+      };
 
     default:
       return state;

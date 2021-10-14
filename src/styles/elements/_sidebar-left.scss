@@ -1,106 +1,27 @@
 .project__sidebar--left {
-  background-color: darken($light, 5%);
   margin-left: $baselineheight / 2;
-  color: $black;
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 25%;
-  padding: 1rem;
-  border-right: dashed 2px $grey;
+  padding: $gutterwidth;
+  background-color: $primary;
+  //border-right: solid 10px $black;
 }
 
-.add__project {
-  display: flex;
-  align-items: center;
-  padding: $baselineheight * 1.25;
-  margin-bottom: $gutterwidth;
-  font-size: fs(small);
-  font-family: $basefont;
-  color: $white;
-  opacity: 0.8;
-  border-radius: $radius;
-  background-color: darken($primary, 25%);
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.project__new {
-  margin-top: $gutterwidth;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: flex-start;
-  width: 100%;
-  transition: color 0.3s ease;
-  cursor: pointer;
-
-  i {
-    margin-right: 10px;
-    color: $white;
-    font-size: fs(small) * 1.25;
-    opacity: 0.7;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.project__form{
-  width: 100%;
-}
-
-.project__section__title{
+.notes{
+  @extend %center;
   padding: $baselineheight;
-  margin-top: $gutterwidth;
-  margin-bottom: $gutterwidth;
-  font-family: $altfont;
-  font-size: fs(small) * 1.25;
-  text-align: left;
-  font-weight: bold;
-  background-color: $compcolor;
-
-}
-
-.project__form__content{
-  display: flex;
-  flex-direction: column;
-}
-
-.notes__title-input,
-.notes__textarea {
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-
-.project__title--input {
-  width: 75%;
-  margin-top: $baselineheight;
-  padding: $baselineheight;
-  color: $black;
-  font-size: fs(small);
-  font-family: $basefont;
-  margin-bottom: $baselineheight;
-  box-shadow: 1px 1px 2px $grey;
-  border: solid 1px $black;
-}
-
-.project__description {
   width: 95%;
-  margin-bottom: gutterwidth;
-  padding: $baselineheight;
-  color: $black;
-  font-size: fs(small);
-  resize: none;
-  box-shadow: 1px 1px 2px $grey;
-  font-family: $basefont;
+  border: solid 1px $black;
+
+  p{
+    line-height: $gutterwidth;
+    font-family: $basefont;
+    font-size: fs(small);
+    margin-bottom: $baselineheight;
+    font-weight: bold;
+  }
 }
 
 .projects {
@@ -110,40 +31,35 @@
 }
 
 .project {
-  background-color: $black;
-
   display: flex;
   justify-content: space-between;
-  color: $white;
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
+  margin-bottom: $baselineheight;
+  background-color: darken($compcolor, 15%);
   //overflow: hidden;
+  opacity: 0.8;
   cursor: pointer;
+
+  &:hover{
+    opacity: 1;
+  }
 }
 
-/* .journal__entry--picture{
-    background-color: transparent;
-    width: 50vw;
-  }*/
-
-.project__body {
+.project__dates {
   width: 60%;
-  border-radius: 10px;
-  padding: 0.5rem;
+  padding: $baselineheight;
 }
 
 .project__title {
-  margin: 0;
   color: $white;
   text-align: left;
-  font-size: 16px;
+  font-size: fs(small);
   font-weight: bold;
   font-family: $basefont;
 }
 .project__text {
   color: $white;
-  margin-top: 0.5rem;
-  font-size: 14px;
+  margin-top: $baselineheight;
+  font-size: fs(small);
   text-align: left;
   opacity: 0.8;
   font-family: $basefont;
@@ -151,19 +67,21 @@
 
 .project__date-box {
   width: 40%;
-  margin: 0;
-  padding: 0.5rem;
+  padding: $baselineheight;
   display: flex;
   align-items: left;
   flex-direction: column;
   justify-content: center;
-  background-color: $darkgrey;
-  border-left: solid 3px $white;
+  background-color: $compcolor;
+  border-left: solid 4px $primary;
 
   span,
   h4 {
-    font-size: fs(small);
-    color: $white;
+    font-size: fs(x-small);
+    color: $black;
     font-family: $basefont;
   }
 }
+
+
+
