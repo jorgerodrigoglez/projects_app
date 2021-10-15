@@ -16,12 +16,13 @@
   
   .auth__title{
       padding: $baselineheight;
-      margin-bottom: $gutterwidth;
-      color: darken( $primary, 20%);
-      text-align: center;
+      margin-bottom: $gutterwidth * 1.5;
+      color: $compcolor;
+      text-align: left;
       font-size: fs(normal);
       font-family: $basefont;
-      background-color: $compcolor-light;
+      background-color: $light;
+      border: solid 1px $compcolor;
   }
   
   .auth__input{

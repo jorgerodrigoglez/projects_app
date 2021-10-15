@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 // reducers
 import { authReducer } from "../reducers/authReducer";
 import { messagesReducer } from "../reducers/messagesReducer";
+import { uiReducer } from "../reducers/uiReducer";
 import { projectsReducer } from "../reducers/projectsReducer";
 
 // para hacer peticiones sincronas es necesario este middleware
@@ -18,6 +19,7 @@ const composeEnhancers =
 const reducers = combineReducers({
   auth: authReducer,
   messages: messagesReducer,
+  ui: uiReducer,
   projects: projectsReducer,
 });
 

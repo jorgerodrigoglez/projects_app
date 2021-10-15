@@ -1,54 +1,62 @@
-import React, { useState } from "react";
-
 // momment
 import moment from "moment";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // actions project
-import { newProject } from "../../../actions/projects";
+import { newProject, startDeleting } from "../../../actions/projects";
+// actions ui
+import { uiOpenModal } from "../../../actions/ui";
 
-export const ProjectBar = ({ toggle }) => {
+export const ProjectBar = () => {
   // moment
   const date = moment();
   // react-redux
   const dispatch = useDispatch();
-  // para ocultar el boton del toggle
+  // para edición de datos del proyecto
   const { active } = useSelector(state => state.projects);
-  // state
-  const [toggleBtn, setToggleBtn] = useState(true);
+
   // guardar el proyecto
   const handleNewProject = e => {
     e.preventDefault();
     dispatch(newProject());
   };
-  // funcion para abrir formulario
-  const openForm = e => {
-    e.preventDefault();
-    toggle();
-    setToggleBtn(true);
+
+  // elimina el projecto
+  // por el momento el titulo y la descripcion
+  // manejador de borrar nota
+  const handleDelete = () => {
+    //console.log(id);
+    dispatch(startDeleting(active.id));
+  };
+
+  // abre el modal
+  const openModal = () => {
+    dispatch(uiOpenModal());
   };
 
   return (
     <div className="bar__project">
-      <span>{date.format("LLLL")}</span>
+      <span className="bar__project--date">{date.format("LLLL")}</span>
 
       <div className="bar__project__box">
-        <div className="project__new" onClick={handleNewProject}>
-          <div className="add__project">
+        {active && (
+          <div className="bar__project__btn">
+            <button className="bar__project__btn--edit" onClick={openModal}>
+              Editar
+            </button>
+            <button
+              className="bar__project__btn--delete"
+              onClick={handleDelete}
+            >
+              Eliminar
+            </button>
+          </div>
+        )}
+        <div className="project__new" onClick={openModal}>
+          <div className="add__project" onClick={handleNewProject} >
             <i className="fas fa-plus-circle fa-5x"></i>
           </div>
         </div>
-        {active && (
-          <div className="btn-active" onClick={openForm}>
-            <div className="toggle__btn">
-              {toggleBtn ? (
-                <i className="fas fa-times"></i>
-              ) : (
-                <i className="fas fa-bars"></i>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

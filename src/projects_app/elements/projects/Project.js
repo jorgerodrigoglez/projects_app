@@ -25,6 +25,7 @@ const ProjectEntry = ({ id, title, description, date }) => {
     );
   };
 
+
   return (
     <div className="project" onClick={handleActiveProject}>
       <div className="project__dates">
@@ -37,6 +38,7 @@ const ProjectEntry = ({ id, title, description, date }) => {
         <h4>{projectDate.format("LT")}</h4>
         <span>{projectDate.format("LL")}</span>
       </div>
+
     </div>
   );
 };

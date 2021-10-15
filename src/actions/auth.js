@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 // actions messages
 import { startLoading, finishLoading } from "./messages";
+// actions project
+import { projectLogout } from "./projects";
 
 /* dispatch se encarga de enviar la respectiva accion los reducers y como los nombres de los types son únicos solo hay un reducer que va a ejecutar esa acción */
 
@@ -95,6 +97,8 @@ export const startLogout = () => {
   return async dispatch => {
     await firebase.auth().signOut();
     dispatch(logout());
+    // elimina los datos del state de proyectos al hacer logout
+    dispatch( projectLogout() );
   };
 };
 // logout reducer

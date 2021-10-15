@@ -15,9 +15,9 @@ export const Bar = () => {
   return (
     <div className="bar">
       <h3 className="bar__title">
-        <span className="bar__title__name"> Bienvenido: {name}</span>
+        <span className="bar__title"> Bienvenido: <span className="bar__title__name" >{name}</span></span>
       </h3>
-      <button className="btn" onClick={handleLogout}>
+      <button className="bar__logout--btn" onClick={handleLogout}>
         Cerrar sesión
       </button>
     </div>

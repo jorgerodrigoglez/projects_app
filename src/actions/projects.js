@@ -1,11 +1,7 @@
 // firebase
 import { db } from "../firebase/firebase-config";
-// libreria de alertas
-import Swal from "sweetalert2";
 // types
 import { types } from "../types/types";
-// libreria de alertas
-//import Swal from "sweetalert2";
 // helper para obtener los proyectos de la bbdd de firebase
 import { loadProjects } from "../helpers/loadProjects";
 
@@ -23,11 +19,12 @@ export const newProject = () => {
     const newProject = {
       title: "",
       description: "",
-      date: new Date().getTime() // timestap
+      // hora actual
+      date: new Date().getTime() 
     };
 
     const docProject = await db
-      .collection(`${uid}/projects/project`)
+      .collection(`${uid}/projects/projects`)
       .add(newProject);
     //console.log( docProject );
     // hay que cambiar reglas de firebase en produccion - write: if true; - para eliminar el error al pulsar el boton del Sidebar
@@ -86,12 +83,12 @@ export const startSaveProject = project => {
     delete projectToFirebase.id;
 
     await db
-      .doc(`${uid}/projects/project/${project.id}`)
+      .doc(`${uid}/projects/projects/${project.id}`)
       .update(projectToFirebase);
 
     // llamar a funcion para actualizar la nota
     dispatch(refreshProjects(project.id, projectToFirebase));
-    Swal.fire("Saved", project.title, "success");
+    // cerrar modal
   };
 };
 
@@ -106,4 +103,26 @@ export const refreshProjects = (id, project) => ({
       ...project
     }
   }
+});
+
+/** BORRA EL PROYECTO ACTUAL */
+// el id que enviamos es el id de la nota
+export const startDeleting = id => {
+  return async (dispatch, getState) => {
+    // uid del usuario
+    const uid = getState().auth.uid;
+    await db.doc(`${uid}/projects/projects/${id}`).delete();
+
+    dispatch(deleteProject(id));
+  };
+};
+
+export const deleteProject = id => ({
+  type: types.projectDelete,
+  payload: id
+});
+
+// limpiar el store despues de hacer logout
+export const projectLogout = () => ({
+  type: types.projectLogoutCleaning
 });

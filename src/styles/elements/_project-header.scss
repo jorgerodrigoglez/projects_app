@@ -14,16 +14,51 @@
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
 
-  span {
+  &--date {
+    padding: $baselineheight;
     font-family: $altfont;
     font-size: fs(small);
+    color: $white;
+    background-color: $compcolor;
   }
 
   &__box {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__btn{
+    display: flex;
+    justify-content: center;
+    padding: $baselineheight;
+    margin-right: $baselineheight;
+    background-color: $primary;
+
+    &--edit,
+    &--delete{
+      padding: $baselineheight * 1.25;
+      font-family: $altfont;
+      font-size: fs(small);
+      background-color: $compcolor;
+    }
+    
+    &--edit{
+      background-color: transparent;
+      color: $black;
+      font-weight: bold;
+    }
+
+    &--delete{
+      margin-left: $gutterwidth;
+      background-color: $compcolor;
+      border-radius: $radius;
+      color: $light;
+    }
   }
 }
 
@@ -40,10 +75,10 @@
 }
 
 .project__new {
-
   width: 100%;
   transition: color 0.3s ease;
   cursor: pointer;
+  margin-left: $baselineheight;
 
   i {
     //margin-right: 10px;
@@ -57,39 +92,30 @@
   }
 }
 
-.toggle__btn{
-  padding: $baselineheight * 1.25;
-  font-size: fs(normal);
-  color: $black;
-  opacity: 1;
-  background-color: $primary;
-  cursor: pointer;
-}
 
 .project__form {
   margin-left: $baselineheight;
   margin-right: $baselineheight;
-  width: auto;
+  width: 120%;
 
   &.is-active {
     display: none;
   }
 }
 
-.project__section__title {
+/*.project__section__title {
   margin-bottom: $baselineheight;
   font-family: $altfont;
   font-size: fs(small);
-}
+}*/
 
 .project__form__content {
   padding: $gutterwidth;
   display: flex;
-  width: 95%;
   flex-direction: column;
   align-items: center;
   background-color: $light;
-  border: solid 1px $grey;
+  border: solid 2px $compcolor;
 }
 
 .project__title--input,
@@ -101,28 +127,24 @@
   }
 }
 
-.project__title--input {
-  width: 50%;
-  margin-top: $baselineheight;
+.project__title--input,
+.project__description{
+  width: 90%;
   padding: $baselineheight;
   color: $black;
   font-size: fs(small);
   font-family: $basefont;
   margin-bottom: $baselineheight * 1.25;
-  background-color: lighten($primary, 25%);
+  background-color: $light;
+  border: solid 1px $compcolor;
   box-shadow: 1px 1px 2px $black;
 }
-
+.project__title--input{
+  margin-top: $baselineheight;
+}
 .project__description {
-  width: 50%;
   margin-bottom: gutterwidth;
-  padding: $baselineheight;
-  color: $black;
-  font-family: $basefont;
-  font-size: fs(small);
   resize: none;
-  box-shadow: 1px 1px 2px $black;
-  background-color: lighten($primary, 25%);
 }
 
 .save__btn {

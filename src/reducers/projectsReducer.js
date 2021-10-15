@@ -35,6 +35,18 @@ export const projectsReducer = (state = initialState, action) => {
           project.id === action.payload.id ? action.payload.project : project
         )
       };
+    case types.projectDelete:
+      return {
+        ...state,
+        active: null,
+        projects: state.projects.filter(project => project.id !== action.payload)
+      };
+      case types.projectLogoutCleaning:
+      return {
+        ...state,
+        active: null,
+        projects: []
+      };
 
     default:
       return state;
