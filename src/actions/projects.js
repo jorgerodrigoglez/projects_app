@@ -86,18 +86,17 @@ export const startSaveProject = project => {
       .doc(`${uid}/projects/projects/${project.id}`)
       .update(projectToFirebase);
 
-    // llamar a funcion para actualizar la nota
+    // llamar a funcion para actualizar los proyectos
     dispatch(refreshProjects(project.id, projectToFirebase));
-    // cerrar modal
   };
 };
 
-// actualizacion de reducer despues de la funcion startSaveNote
+// actualizacion de reducer despues de la funcion startSaveProject
 export const refreshProjects = (id, project) => ({
   type: types.projectUpdated,
   payload: {
     id,
-    // incluye el id si la nota no viene con el id y da error en consola, aunque funciona
+    // incluye el id si el proyecto no viene con el id y da error en consola, aunque funciona
     project: {
       id,
       ...project
@@ -106,7 +105,7 @@ export const refreshProjects = (id, project) => ({
 });
 
 /** BORRA EL PROYECTO ACTUAL */
-// el id que enviamos es el id de la nota
+// el id que enviamos es el id del proyecto
 export const startDeleting = id => {
   return async (dispatch, getState) => {
     // uid del usuario

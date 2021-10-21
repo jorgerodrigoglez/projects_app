@@ -1,0 +1,44 @@
+.tasks{
+    @extend %center;
+    width: 90%;
+    padding: $baselineheight;
+    margin-top: $gutterwidth;
+}
+
+.task{
+    &__dates{
+        @extend %center;
+        width: 95%;
+        
+        margin-top: $baselineheight * 1.5;
+        margin-bottom: $baselineheight * 1.5;
+        background-color: $primary;
+        border: solid 1px $primary;
+        box-shadow: 1px 1px 4px $primary;
+
+        &--date{
+            padding: $baselineheight;
+            font-family: $codefont;
+            font-size: fs(small);
+            text-align: left;
+            background-color: $light;
+            color: $black;
+        }
+
+        &--name{
+            padding: $baselineheight * 1.5;
+            font-family: $basefont;
+            font-size: fs(normal);
+            color: $black;
+            font-weight: bold;
+        }
+
+    }
+}
+
+.msg__no__tasks{
+    margin-top: $gutterwidth * 2;
+    font-family: $altfont;
+    font-size: fs(normal);
+    text-align: center;
+}

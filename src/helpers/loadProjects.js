@@ -1,6 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
-/* HELPER PARA OBTENER LAS NOTAS DE LA BBDD */
+/* HELPER PARA OBTENER LOS PROYECTOS DE LA BBDD */
 export const loadProjects = async uid => {
   const projectsSnap = await db.collection(`${uid}/projects/projects`).get();
   //console.log(projectsSnap);
@@ -11,9 +11,9 @@ export const loadProjects = async uid => {
   projectsSnap.forEach(snapChild => {
     //console.log(snapChild.data()); //extraemos el description,date,title del documento de bbdd, pero falta el id
     projects.push({
-      // extraemos el id de cada nota
+      // extraemos el id de cada proyecto
       id: snapChild.id,
-      // extraemos la data de cada nota
+      // extraemos la data de cada proyecto
       ...snapChild.data()
     });
   });

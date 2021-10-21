@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Project from "./Project";
 
 const Projects = () => {
+  // redux
   const { projects } = useSelector(state => state.projects);
   //console.log(projects);
   // si no hay proyectos que mostrar
@@ -13,8 +14,8 @@ const Projects = () => {
   return (
     <>
       <div className="notes"> 
-        <p>** Para editar o selecionar un proyecto pulsa sobre el proyecto correspondiente</p>
-        <p>** Para crear un nuevo proyecto pulsa el botón de la barra superior</p>
+        <p>** Para crear un nuevo proyecto pulsa el botón "+" de la barra superior</p>
+        <p>** Para selecionar un proyecto pulsa sobre el proyecto correspondiente</p>
       </div>
       <div className="projects">
         {projects.map(project => (

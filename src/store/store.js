@@ -8,6 +8,7 @@ import { authReducer } from "../reducers/authReducer";
 import { messagesReducer } from "../reducers/messagesReducer";
 import { uiReducer } from "../reducers/uiReducer";
 import { projectsReducer } from "../reducers/projectsReducer";
+import { taskReducer } from "../reducers/taskReducer";
 
 // para hacer peticiones sincronas es necesario este middleware
 const composeEnhancers =
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   messages: messagesReducer,
   ui: uiReducer,
   projects: projectsReducer,
+  tasks: taskReducer
 });
 
 // exportacion del store

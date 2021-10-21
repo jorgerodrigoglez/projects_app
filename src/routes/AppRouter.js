@@ -17,6 +17,8 @@ import { PrivateRoute } from "./PrivateRoute";
 //import { loadProjects } from "../helpers/loadProjects";
 // action projects
 import { startLoadingProjects } from "../actions/projects";
+// action tasks
+//import { startLoadingTasks } from "../actions/tasks";
 
 // COMPONENT
 export const AppRouter = () => {
@@ -31,7 +33,7 @@ export const AppRouter = () => {
   // tiene que responder antes de realizar cualquier otra accion ya que eso generaria un error
   useEffect(() => {
     // esta funcion va a estar observando si el usuario ha cambiado o permanece logeado en la app
-    firebase.auth().onAuthStateChanged( async user => {
+    firebase.auth().onAuthStateChanged(async user => {
       //console.log(user);
       //si no estoy autenticado user va a regresar un null
       //si user tiene algo, no viene vacio, entonces pregunta si existe uid, sino existe el if no se ejecuta
@@ -43,16 +45,20 @@ export const AppRouter = () => {
         // projects es un array de objetos
         //loadProjects(user.uid);
         //const projects = await loadProjects( user.uid );
-        // accion que dispara el almacenamiento de los proyectos en el store
-        dispatch( startLoadingProjects( user.uid ))
+        // accion para el almacenamiento de los proyectos en el store de forma permanente
+        dispatch(startLoadingProjects(user.uid));
       } else {
         // comprobar autenticación del usuario
         setIsLoggedIn(false);
       }
       // la BBDD a respondido correctamente
       setChecking(false);
+      // accion para el almacenamiento de las tareas en el store de forma permanente
+      //dispatch(startLoadingTasks(user.uid));
+      //console.log(tasks);
     });
   }, [dispatch, setChecking, setIsLoggedIn]);
+
 
   // controla el estado de la repuesta de firebase
   if (checking) {

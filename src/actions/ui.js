@@ -1,7 +1,7 @@
 // types
 import { types } from "../types/types";
 
-// mensajes de error de formulario de login y register
+// controla la accion de la ventana modal
 export const uiOpenModal = () => ({
   type: types.uiOpenModal,
 });

@@ -16,4 +16,8 @@ export const types = {
     projectUpdated: '[Project] Modificar datos del proyecto guardado',
     projectDelete: '[Project] Borrar nota',
     projectLogoutCleaning: '[Project] Logout limpiar notas en memoria',
+
+    taskAdd: '[Task] Añadir tareas a un proyecto',
+    //tasksLoad: '[Task] cargar tareas de los proyectos',
+    tasksProject: '[Task] filtra las tareas de cada proyecto',
 }

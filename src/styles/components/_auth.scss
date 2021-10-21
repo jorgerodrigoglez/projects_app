@@ -54,7 +54,10 @@
   }
   
   .auth__alert--error{
+      @extend %center;
       display: flex;
+      width: 70%;
+      margin-top: $baselineheight;
       justify-content: center;
       margin-bottom: $gutterwidth;
       padding: $baselineheight;

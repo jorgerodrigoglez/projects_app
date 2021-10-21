@@ -4,8 +4,10 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 // action projects
 import { activeProject } from "../../../actions/projects";
+// actions tasks
+import { startLoadingTasksProject } from "../../../actions/tasks";
 
-const ProjectEntry = ({ id, title, description, date }) => {
+const Project = ({ id, title, description, date }) => {
   //console.log( id, date, title, description );
   // moment
   const projectDate = moment(date);
@@ -23,8 +25,11 @@ const ProjectEntry = ({ id, title, description, date }) => {
         date
       })
     );
+    // lamada a funcion para filtrar las tareas del proyecto activo
+    // accion para el almacenamiento de las tareas en el store de forma permanente
+    dispatch(startLoadingTasksProject(id));
+    //dispatch(startLoadingTasks(uid));
   };
-
 
   return (
     <div className="project" onClick={handleActiveProject}>
@@ -38,9 +43,8 @@ const ProjectEntry = ({ id, title, description, date }) => {
         <h4>{projectDate.format("LT")}</h4>
         <span>{projectDate.format("LL")}</span>
       </div>
-
     </div>
   );
 };
 
-export default ProjectEntry;
+export default Project;
