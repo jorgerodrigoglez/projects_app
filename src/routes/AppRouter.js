@@ -17,8 +17,7 @@ import { PrivateRoute } from "./PrivateRoute";
 //import { loadProjects } from "../helpers/loadProjects";
 // action projects
 import { startLoadingProjects } from "../actions/projects";
-// action tasks
-//import { startLoadingTasks } from "../actions/tasks";
+
 
 // COMPONENT
 export const AppRouter = () => {
@@ -53,9 +52,7 @@ export const AppRouter = () => {
       }
       // la BBDD a respondido correctamente
       setChecking(false);
-      // accion para el almacenamiento de las tareas en el store de forma permanente
-      //dispatch(startLoadingTasks(user.uid));
-      //console.log(tasks);
+  
     });
   }, [dispatch, setChecking, setIsLoggedIn]);
 

@@ -16,10 +16,11 @@ export const FormTask = () => {
   const { active:project } = useSelector(state => state.projects);
   // hook para captar valores de la tarea
   const [formValues, handleInputChange, reset] = useForm({
-    task: "",
+    text: "",
+    complete: false,
   });
   // desestructuramos el objeto que retorna el hook
-  const { task } = formValues;
+  const { text, complete } = formValues;
   //console.log(task);
   // funcion para validar y enviar la tarea a bbdd
   const handleTask = e => {
@@ -27,14 +28,14 @@ export const FormTask = () => {
     //console.log(email, password);
     if (isFormTaskValid()) {
       //console.log(task);
-      dispatch(newTask(task, project));
+      dispatch(newTask(text, project, complete));
       //limpia datos del formulario
       reset();
     }
   };
   // funcion para validar los campos del formulario
   const isFormTaskValid = () => {
-    if (task === "") {
+    if (text === "") {
       dispatch(setError("La tarea no puede estar vacia"));
       return false;
     }
@@ -47,8 +48,8 @@ export const FormTask = () => {
         type="text"
         placeholder="Tarea"
         className="form__task--input"
-        name="task"
-        value={task}
+        name="text"
+        value={text}
         onChange={handleInputChange}
       />
       {/* Mensaje de error */}

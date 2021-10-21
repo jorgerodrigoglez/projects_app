@@ -18,6 +18,6 @@ export const types = {
     projectLogoutCleaning: '[Project] Logout limpiar notas en memoria',
 
     taskAdd: '[Task] Añadir tareas a un proyecto',
-    //tasksLoad: '[Task] cargar tareas de los proyectos',
-    tasksProject: '[Task] filtra las tareas de cada proyecto',
+    tasksProject: '[Task] Filtra las tareas de cada proyecto',
+    taskCheck: '[Task] Cambia el check de la tarea',
 }

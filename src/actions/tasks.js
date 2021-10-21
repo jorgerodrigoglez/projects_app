@@ -8,7 +8,7 @@ import { types } from "../types/types";
 /************** NUEVO PROYECTO */
 
 // CREAMOS UN NUEVO PROYECTO EN LA BBDD
-export const newTask = (task, project) => {
+export const newTask = (text, project, complete) => {
   // el getState nos da acceso a todo el state de la app
   return async (dispatch, getState) => {
     //const state = getState();
@@ -16,8 +16,9 @@ export const newTask = (task, project) => {
     const { uid } = getState().auth;
     //console.log(uid, task, project);
     const newTask = {
-      task,
+      text,
       idProject: project.id,
+      complete,
       // hora actual
       date: new Date().getTime()
     };
@@ -40,27 +41,9 @@ export const addNewTask = (id, task) => ({
   }
 });
 
-/**  */
-// optimizacion del codigo de appRouter de helpers para obtener las tareas de la bbdd
-/*export const startLoadingTasks = uid => {
-  return async dispatch => {
-    // helpers
-    // esto es una promesa
-    const tasksBbdd = await loadTasks(uid);
-    //console.log(tasksBbdd);
-    dispatch(setTasks(tasksBbdd));
-  };
-};*/
-
-// almacena las tareas en el state de tareas
-/*export const setTasks = tasks => ({
-  type: types.tasksLoad,
-  payload: tasks
-});*/
-
 /** */
 // selecciona tareas del proyecto activo
-export const startLoadingTasksProject = (idProject) => {
+export const startLoadingTasksProject = idProject => {
   return async (dispatch, getState) => {
     //console.log(idProject);
     // uid del usuario
@@ -68,13 +51,13 @@ export const startLoadingTasksProject = (idProject) => {
     /** Firebase documentation : https://firebase.google.com/docs/firestore/query-data/queries */
     const taskRef = db.collection(`${uid}/projects/tasks`);
     const snapshot = await taskRef.where("idProject", "==", idProject).get();
-    
+
     // definimos array para recoger los dos objetos que devuelve la BBDD
     const tasksProject = [];
 
     if (snapshot.empty) {
       //console.log("No matching documents");
-      // llamada al reducer
+      // llamada al reducer para obtener las tareas de un proyecto
       dispatch(setTasksProject(tasksProject));
       return;
     }
@@ -87,7 +70,7 @@ export const startLoadingTasksProject = (idProject) => {
         ...doc.data()
       });
       //console.log(tasksProject);
-      // llamada al reducer
+      // llamada al reducer para obtener las tareas de un proyecto
       dispatch(setTasksProject(tasksProject));
     });
     /** */
@@ -98,4 +81,33 @@ export const startLoadingTasksProject = (idProject) => {
 export const setTasksProject = tasksProject => ({
   type: types.tasksProject,
   payload: tasksProject
+});
+
+/** */
+export const setTaskCheck = ( id, task, newComplete) => {
+  return async (dispatch, getState) => {
+    //console.log(task, newComplete);
+    // uid del usuario
+    const uid = getState().auth.uid;
+    //se envía el valor a la BBDD
+    await db
+      .doc(`${uid}/projects/tasks/${id}`)
+      .update(newComplete)
+      .then(() => {
+        console.log("La tarea fue editada con exito");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    // llamada al reducer para cambiar el state de tasks complete
+    dispatch(setCheck(newComplete));
+    // refrescar tareas del proyecto seleccionado
+    dispatch(startLoadingTasksProject(task.idProject) )
+  };
+};
+
+// llamada el reducer para cambiar el check de la tarea
+export const setCheck = newComplete => ({
+  type: types.taskCheck,
+  payload: newComplete
 });

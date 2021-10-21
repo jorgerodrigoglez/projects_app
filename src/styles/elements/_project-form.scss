@@ -4,6 +4,10 @@
     width: 95%;
     background-color: $light;
     text-align: center;
+    padding-bottom: $gutterwidth;
+    margin-bottom: $gutterwidth;
+    border-bottom: dashed 2px $grey;
+
     &--input{
         border: none;
         border: solid 1px $grey;
@@ -22,10 +26,16 @@
         button{
             width: 25%;
             padding: $baselineheight;
-            background-color: $primary;
-            font-family: $altfont;
+            background-color: darken($compcolor, 5%) ;
+            font-family: $basefont;
             font-size: fs(small) * 1.25;
+            color: $light;
             border-radius: $radius;
+            opacity: 1;
+
+            &:hover{
+                opacity: .9;
+            }
         }
     }
 }

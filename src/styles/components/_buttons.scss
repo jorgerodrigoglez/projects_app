@@ -26,10 +26,10 @@
   font-weight: bold;
 
   &:disabled {
-    background-color: lighten($primary, 10%);
+    background-color: lighten($google-blue, 10%);
   }
   &:hover {
-    background-color: darken($primary, 20%);
+    background-color: darken($google-blue, 5%);
   }
 }
 

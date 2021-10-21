@@ -28,7 +28,6 @@ const Project = ({ id, title, description, date }) => {
     // lamada a funcion para filtrar las tareas del proyecto activo
     // accion para el almacenamiento de las tareas en el store de forma permanente
     dispatch(startLoadingTasksProject(id));
-    //dispatch(startLoadingTasks(uid));
   };
 
   return (

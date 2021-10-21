@@ -56,10 +56,10 @@
   .auth__alert--error{
       @extend %center;
       display: flex;
-      width: 70%;
+      width: 100%;
       margin-top: $baselineheight;
+      margin-bottom: $baselineheight;
       justify-content: center;
-      margin-bottom: $gutterwidth;
       padding: $baselineheight;
       color: $light;
       background-color: $color-error;

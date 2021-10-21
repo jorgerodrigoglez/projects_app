@@ -2,7 +2,8 @@
 import { types } from "../types/types";
 
 const initialState = {
-  tasks: []
+  tasks: [],
+  complete: false
 };
 
 export const taskReducer = (state = initialState, action) => {
@@ -12,16 +13,18 @@ export const taskReducer = (state = initialState, action) => {
         ...state,
         tasks: [action.payload, ...state.tasks]
       };
-    /*case types.tasksLoad:
-      return {
-        ...state,
-        tasks: [...action.payload]
-      };*/
+  
     case types.tasksProject:
       //console.log(action.payload);
       return {
         ...state,
         tasks: [...action.payload]
+      };
+    case types.taskCheck:
+      console.log(action.payload);
+      return {
+        ...state,
+        complete: action.payload
       };
 
     default:
