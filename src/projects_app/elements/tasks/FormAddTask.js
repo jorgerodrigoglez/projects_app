@@ -7,32 +7,35 @@ import { removeError, setError } from "../../../actions/messages";
 // actions tasks
 import { newTask } from "../../../actions/tasks";
 
-export const FormTask = () => {
+export const FormAddTask = () => {
   // react-redux
   const dispatch = useDispatch();
   // redux - desestructuramos msgError del state messages
   const { msgError } = useSelector(state => state.messages);
   // desestructuramos active del state de projects
-  const { active:project } = useSelector(state => state.projects);
+  const { active: project } = useSelector(state => state.projects);
   // hook para captar valores de la tarea
   const [formValues, handleInputChange, reset] = useForm({
     text: "",
-    complete: false,
+    complete: false
   });
   // desestructuramos el objeto que retorna el hook
   const { text, complete } = formValues;
-  //console.log(task);
+
+  //console.log(text);
   // funcion para validar y enviar la tarea a bbdd
   const handleTask = e => {
     e.preventDefault();
     //console.log(email, password);
+    // funcion para añadir tarea
     if (isFormTaskValid()) {
       //console.log(task);
       dispatch(newTask(text, project, complete));
-      //limpia datos del formulario
-      reset();
     }
+    //limpia datos del formulario
+    reset();
   };
+
   // funcion para validar los campos del formulario
   const isFormTaskValid = () => {
     if (text === "") {
@@ -42,6 +45,7 @@ export const FormTask = () => {
     dispatch(removeError());
     return true;
   };
+
   return (
     <form className="form__task" onSubmit={handleTask}>
       <input

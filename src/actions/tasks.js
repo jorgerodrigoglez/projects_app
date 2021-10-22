@@ -41,6 +41,16 @@ export const addNewTask = (id, task) => ({
   }
 });
 
+// INVOCAMOS AL REDUCER
+// cambia el active, al no ser null se activa la tarea
+export const activeTask = (id, task) => ({
+  type: types.taskActive,
+  payload: {
+    id,
+    ...task
+  }
+});
+
 /** */
 // selecciona tareas del proyecto activo
 export const startLoadingTasksProject = idProject => {
@@ -83,7 +93,7 @@ export const setTasksProject = tasksProject => ({
   payload: tasksProject
 });
 
-/** */
+/** INPUT CHECK DE CADA TAREA*/
 export const setTaskCheck = ( id, task, newComplete) => {
   return async (dispatch, getState) => {
     //console.log(task, newComplete);
@@ -111,3 +121,27 @@ export const setCheck = newComplete => ({
   type: types.taskCheck,
   payload: newComplete
 });
+
+/************** GUARDAMOS LA TAREA EDITADA EN BBDD */
+export const startSaveTask = task => {
+  return async (dispatch, getState) => {
+    // uid del user
+    const { uid } = getState().auth;
+
+    // eliminar el id de la nota que recibimos por parametro antes de grabarlo en la bbdd
+    const taskToFirebase = { ...task };
+    delete taskToFirebase.id;
+
+    await db
+      .doc(`${uid}/projects/tasks/${task.id}`)
+      .update(taskToFirebase);
+
+    // llamar a funcion para quitar la tarea que esta activa
+    dispatch(refreshTaskActive(task));
+  };
+};
+// llamada el reducer para cambiar el activeTask de la tarea
+export const refreshTaskActive = task => ({
+  type: types.taskActiveReflesh,
+  payload: task
+})

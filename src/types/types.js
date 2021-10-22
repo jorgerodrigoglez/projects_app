@@ -20,4 +20,6 @@ export const types = {
     taskAdd: '[Task] Añadir tareas a un proyecto',
     tasksProject: '[Task] Filtra las tareas de cada proyecto',
     taskCheck: '[Task] Cambia el check de la tarea',
+    taskActive: '[Task] Establecer la tarea como activa',
+    taskActiveReflesh: '[Task] Eliminar la tarea activa',
 }

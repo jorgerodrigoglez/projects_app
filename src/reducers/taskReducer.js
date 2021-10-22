@@ -3,7 +3,8 @@ import { types } from "../types/types";
 
 const initialState = {
   tasks: [],
-  complete: false
+  complete: false,
+  activeTask: null
 };
 
 export const taskReducer = (state = initialState, action) => {
@@ -13,7 +14,7 @@ export const taskReducer = (state = initialState, action) => {
         ...state,
         tasks: [action.payload, ...state.tasks]
       };
-  
+
     case types.tasksProject:
       //console.log(action.payload);
       return {
@@ -21,10 +22,22 @@ export const taskReducer = (state = initialState, action) => {
         tasks: [...action.payload]
       };
     case types.taskCheck:
-      console.log(action.payload);
+      //console.log(action.payload);
       return {
         ...state,
         complete: action.payload
+      };
+    case types.taskActive:
+      return {
+        ...state,
+        activeTask: {
+          ...action.payload
+        }
+      };
+    case types.taskActiveReflesh:
+      return {
+        ...state,
+        activeTask: null
       };
 
     default:

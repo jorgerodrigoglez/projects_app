@@ -4,8 +4,13 @@ import { firebase } from "../firebase/firebase-config";
 // redux
 import { useDispatch } from "react-redux";
 // react router dom
-import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
-// comppnents
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+// components
 import { AuthRouter } from "./AuthRouter";
 import { ProjectsScreen } from "../projects_app/ProjectsScreen";
 // action auth
@@ -17,7 +22,7 @@ import { PrivateRoute } from "./PrivateRoute";
 //import { loadProjects } from "../helpers/loadProjects";
 // action projects
 import { startLoadingProjects } from "../actions/projects";
-
+import Error404 from "../projects_app/Error404";
 
 // COMPONENT
 export const AppRouter = () => {
@@ -52,10 +57,8 @@ export const AppRouter = () => {
       }
       // la BBDD a respondido correctamente
       setChecking(false);
-  
     });
   }, [dispatch, setChecking, setIsLoggedIn]);
-
 
   // controla el estado de la repuesta de firebase
   if (checking) {
@@ -77,6 +80,8 @@ export const AppRouter = () => {
             component={ProjectsScreen}
             isAuthenticated={isLoggedIn}
           />
+
+          <Route component={Error404} />
           <Redirect to="/auth/login" />
         </Switch>
       </div>

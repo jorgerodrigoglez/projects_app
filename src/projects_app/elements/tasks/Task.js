@@ -1,4 +1,3 @@
-
 //FONT AWESOME
 //yarn add @fortawesome/fontawesome-svg-core
 //yarn add @fortawesome/free-solid-svg-icons
@@ -13,13 +12,12 @@ import {
 // momment - npm install momment --save
 import moment from "moment";
 // redux
-// redux
 import { useDispatch } from "react-redux";
 // action tasks
-import { setTaskCheck } from "../../../actions/tasks";
+import { setTaskCheck, activeTask } from "../../../actions/tasks";
 
 const Task = ({ task }) => {
-  const { id, text, complete, date} = task;
+  const { id, text, idProject, complete, date } = task;
   //console.log(id,task,date,complete);
   // desestructuracion del is de la tarea
   // moment
@@ -38,6 +36,18 @@ const Task = ({ task }) => {
     //console.log(newComplete);
     // accion de cambio de check
     dispatch(setTaskCheck(id, task, newComplete));
+  };
+  // funcion para activar la tarea
+  const handleActiveTask = () => {
+    // para activar la tarea hay que enviar el id y la tarea como objeto
+    dispatch(
+      activeTask(id, {
+        text,
+        idProject,
+        complete,
+        date
+      })
+    );
   };
 
   return (
@@ -60,6 +70,7 @@ const Task = ({ task }) => {
           <FontAwesomeIcon
             icon={faEdit}
             className="task__dates__btns__icon--edit"
+            onClick={handleActiveTask}
           />
 
           <FontAwesomeIcon
