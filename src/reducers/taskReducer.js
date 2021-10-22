@@ -39,7 +39,20 @@ export const taskReducer = (state = initialState, action) => {
         ...state,
         activeTask: null
       };
-
+    case types.taskDelete:
+      return {
+        ...state,
+        activeTask: null,
+        tasks: state.tasks.filter(task => task.id !== action.payload)
+      };
+    case types.tasksLogoutCleaning:
+    case types.tasksProjectDelete:
+      return {
+        ...state,
+        tasks: [],
+        activeTask: null,
+        complete: false
+      };
     default:
       return state;
   }

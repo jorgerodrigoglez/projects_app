@@ -1,13 +1,15 @@
 // types
 import { types } from "../types/types";
 // para mostrar alertar de error - npm install sweetalert2
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 // firebase
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 // actions messages
 import { startLoading, finishLoading } from "./messages";
 // actions project
 import { projectLogout } from "./projects";
+// actions tasks
+import { taskLogout } from "./tasks";
 
 /* dispatch se encarga de enviar la respectiva accion los reducers y como los nombres de los types son únicos solo hay un reducer que va a ejecutar esa acción */
 
@@ -36,7 +38,7 @@ export const startRegisterWithEmailPasswordName = (name, email, password) => {
         dispatch(finishLoading());
         // muestra mensaje de error de bbdd firebase
         // texto - mensaje - icono
-        Swal.fire('Error', err.message, 'error');
+        Swal.fire("Error", err.message, "error");
       });
   };
 };
@@ -62,7 +64,7 @@ export const startLoginEmailPassword = (email, password) => {
         dispatch(finishLoading());
         // muestra mensaje de error de bbdd firebase
         // texto - mensaje - icono
-        Swal.fire('Error', err.message, 'error');
+        Swal.fire("Error", err.message, "error");
       });
   };
 };
@@ -98,7 +100,9 @@ export const startLogout = () => {
     await firebase.auth().signOut();
     dispatch(logout());
     // elimina los datos del state de proyectos al hacer logout
-    dispatch( projectLogout() );
+    dispatch(projectLogout());
+    // elimina los datos del state de tareas al hacer logout
+    dispatch(taskLogout());
   };
 };
 // logout reducer

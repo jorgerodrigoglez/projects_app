@@ -14,7 +14,11 @@ import moment from "moment";
 // redux
 import { useDispatch } from "react-redux";
 // action tasks
-import { setTaskCheck, activeTask } from "../../../actions/tasks";
+import {
+  setTaskCheck,
+  setActiveTask,
+  startTaskDelete
+} from "../../../actions/tasks";
 
 const Task = ({ task }) => {
   const { id, text, idProject, complete, date } = task;
@@ -24,7 +28,6 @@ const Task = ({ task }) => {
   const taskDate = moment(date);
   // redux
   const dispatch = useDispatch();
-  // desestructuramos active del state de projects
 
   // activa y desastiva el check en la bbdd
   const toggleComplete = (id, task) => {
@@ -35,19 +38,27 @@ const Task = ({ task }) => {
     };
     //console.log(newComplete);
     // accion de cambio de check
-    dispatch(setTaskCheck(id, task, newComplete));
+    dispatch(setTaskCheck(id,task,newComplete));
   };
   // funcion para activar la tarea
   const handleActiveTask = () => {
     // para activar la tarea hay que enviar el id y la tarea como objeto
     dispatch(
-      activeTask(id, {
+      setActiveTask(id, {
         text,
         idProject,
         complete,
         date
       })
     );
+  };
+
+  // fucion para eliminar tarea
+  const handleDeleteTask = () => {
+    // activar la tarea
+    dispatch(setActiveTask(id, task));
+    // ejecuta eliminacion
+    dispatch(startTaskDelete(id));
   };
 
   return (
@@ -76,7 +87,7 @@ const Task = ({ task }) => {
           <FontAwesomeIcon
             icon={faTimes}
             className="task__dates__btns__icon--delete"
-            //onClick={() => deleteTask(id, uidUser)}
+            onClick={handleDeleteTask}
           />
         </div>
       </div>

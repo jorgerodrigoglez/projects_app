@@ -20,7 +20,7 @@ export const newProject = () => {
       title: "",
       description: "",
       // hora actual
-      date: new Date().getTime() 
+      date: new Date().getTime()
     };
 
     const docProject = await db
@@ -104,24 +104,25 @@ export const refreshProjects = (id, project) => ({
   }
 });
 
-/** BORRA EL PROYECTO ACTUAL */
+/** BORRA EL PROYECTO ACTUAL Y TODAS SUS TAREAS */
 // el id que enviamos es el id del proyecto
-export const startDeleting = id => {
+export const startDeletingProject = id => {
   return async (dispatch, getState) => {
     // uid del usuario
     const uid = getState().auth.uid;
+    // borra datos del proyecto
     await db.doc(`${uid}/projects/projects/${id}`).delete();
-
+    // llamada al reducer
     dispatch(deleteProject(id));
   };
 };
-
+// borra nombre y descripcion del proyecto
 export const deleteProject = id => ({
   type: types.projectDelete,
   payload: id
 });
 
-// limpiar el store despues de hacer logout
+// limpiar el store de proyectos despues de hacer logout
 export const projectLogout = () => ({
   type: types.projectLogoutCleaning
 });

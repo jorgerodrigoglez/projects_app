@@ -1,11 +1,15 @@
 // momment
 import moment from "moment";
+// sweetalert2
+import Swal from "sweetalert2";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // actions project
-import { newProject, startDeleting } from "../../../actions/projects";
+import { newProject, startDeletingProject } from "../../../actions/projects";
 // actions ui
 import { uiOpenModal } from "../../../actions/ui";
+// actions tasks
+import { startDeletingTasksProject } from "../../../actions/tasks";
 
 export const ProjectBar = () => {
   // moment
@@ -23,10 +27,26 @@ export const ProjectBar = () => {
 
   // elimina el projecto
   // por el momento el titulo y la descripcion
-  // manejador de borrar nota
+  // manejador de borrar un proyecto
   const handleDelete = () => {
-    //console.log(id);
-    dispatch(startDeleting(active.id));
+    //console.log(active.id);
+    // aviso antes de borrado
+    Swal.fire({
+      title: "¿Seguro que desea eliminar el proyecto y todas sus tareas?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "¡Si, eliminar!"
+    }).then(result => {
+      if (result.value) {
+        //borra el nombre y descripcion del proyecto - etiqueta lateral
+        dispatch(startDeletingProject(active.id));
+        //borra las tareas del proyecto correspondiente
+        dispatch(startDeletingTasksProject(active.id));  
+      }
+    });
   };
 
   // abre el modal
@@ -53,7 +73,7 @@ export const ProjectBar = () => {
           </div>
         )}
         <div className="project__new" onClick={openModal}>
-          <div className="add__project" onClick={handleNewProject} >
+          <div className="add__project" onClick={handleNewProject}>
             <i className="fas fa-plus-circle fa-5x"></i>
           </div>
         </div>

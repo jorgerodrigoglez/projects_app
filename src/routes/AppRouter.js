@@ -18,8 +18,6 @@ import { login } from "../actions/auth";
 // routes
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
-// helper que lista los proyectos creado en la BBDD de firebase
-//import { loadProjects } from "../helpers/loadProjects";
 // action projects
 import { startLoadingProjects } from "../actions/projects";
 import Error404 from "../projects_app/Error404";
@@ -80,7 +78,6 @@ export const AppRouter = () => {
             component={ProjectsScreen}
             isAuthenticated={isLoggedIn}
           />
-
           <Route component={Error404} />
           <Redirect to="/auth/login" />
         </Switch>
