@@ -21,9 +21,9 @@ import {
 } from "../../../actions/tasks";
 
 const Task = ({ task }) => {
-  const { id, text, idProject, complete, date } = task;
-  //console.log(id,task,date,complete);
-  // desestructuracion del is de la tarea
+  const { id, text, idProject, complete, date, priority } = task;
+  // desestructuracion de la tarea
+  //console.log(id,task,date,complete,priority);
   // moment
   const taskDate = moment(date);
   // redux
@@ -38,7 +38,7 @@ const Task = ({ task }) => {
     };
     //console.log(newComplete);
     // accion de cambio de check
-    dispatch(setTaskCheck(id,task,newComplete));
+    dispatch(setTaskCheck(id, task, newComplete));
   };
   // funcion para activar la tarea
   const handleActiveTask = () => {
@@ -48,7 +48,8 @@ const Task = ({ task }) => {
         text,
         idProject,
         complete,
-        date
+        date,
+        priority
       })
     );
   };
@@ -74,6 +75,9 @@ const Task = ({ task }) => {
 
         <div className="task__dates">
           <p className="task__dates--date">{taskDate.format("LLLL")}</p>
+          {priority && (
+            <p className="task__dates--priority"><span>Prioridad:</span> {priority}</p>
+          )}
           <p className="task__dates--name">{text}</p>
         </div>
         {/* link para pagina de editar */}

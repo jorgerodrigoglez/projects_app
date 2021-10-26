@@ -1,41 +1,102 @@
-.form__task{
+.form__task {
+  @extend %center;
+  padding: $baselineheight;
+  width: 95%;
+  background-color: $light;
+  text-align: center;
+  padding-bottom: $gutterwidth;
+  margin-bottom: $gutterwidth;
+  border-bottom: dashed 2px $grey;
+
+  &--input {
+    border: none;
+    border: solid 1px $grey;
     @extend %center;
-    padding: $baselineheight;
-    width: 95%;
+    padding: $baselineheight * 1.5;
     background-color: $light;
+    width: 90%;
+    font-size: fs(normal);
+    font-family: $basefont;
+  }
+  &__btn {
+    margin-top: $gutterwidth;
+    width: 100%;
     text-align: center;
-    padding-bottom: $gutterwidth;
+
+    &--edit,
+    &--add {
+      width: 25%;
+      padding: $baselineheight;
+      background-color: darken($compcolor, 5%);
+      font-family: $basefont;
+      font-size: fs(small) * 1.25;
+      color: $light;
+      border-radius: $radius;
+      opacity: 1;
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+
+    &--cancel {
+      padding: $baselineheight;
+      margin-left: $gutterwidth;
+      font-family: $altfont;
+      font-size: fs(small);
+      color: $black;
+      font-weight: bold;
+    }
+  }
+}
+
+// priorities
+.select__form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  @extend %center;
+  text-align: center;
+  width: 92%;
+  &__priorities {
+    position: relative;
+    padding: $baselineheight;
     margin-bottom: $gutterwidth;
-    border-bottom: dashed 2px $grey;
+    height: 15px;
+    width: 15%;
+    transition: 0.5s ease all;
+    background-color: transparent;
+    cursor: pointer;
+  }
 
-    &--input{
-        border: none;
-        border: solid 1px $grey;
-        @extend %center;
-        padding: $baselineheight * 1.5;
-        background-color: $light;
-        width: 90%;
-        font-size: fs(normal);
-        font-family: $basefont;
-    }
-    &--btn{
-        margin-top: $gutterwidth;
-        width: 100%;
-        text-align: center;
-        
-        button{
-            width: 25%;
-            padding: $baselineheight;
-            background-color: darken($compcolor, 5%) ;
-            font-family: $basefont;
-            font-size: fs(small) * 1.25;
-            color: $light;
-            border-radius: $radius;
-            opacity: 1;
+  &__selected {
+    padding: $baselineheight;
+    width: 100%;
+    color: $light;
+    font-size: fs(x-small);
+    font-weight: bold;
+    font-family: $basefont;
+    background-color: $compcolor;
+  }
 
-            &:hover{
-                opacity: .9;
-            }
-        }
-    }
+  &__options {
+    padding: $baselineheight;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    width: 150px;
+    max-height: 100px;
+    overflow-y: auto;
+    z-index: 1;
+    background-color: $primary;
+  }
+
+  &__option {
+    padding: $baselineheight;
+    color: $black;
+    font-size: fs(small);
+    font-family: $altfont;
+    text-align: left;
+    border-bottom: dashed 1px $white;
+  }
 }

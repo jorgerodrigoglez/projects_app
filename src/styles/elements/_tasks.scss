@@ -12,8 +12,6 @@
 
   &__icon {
     padding: $gutterwidth;
-    border: solid 1px $primary;
-    box-shadow: 1px 1px 4px $primary;
     margin-right: $baselineheight;
     cursor: pointer;
     
@@ -28,9 +26,11 @@
     width: 95%;
     margin-top: $baselineheight * 1.5;
     margin-bottom: $baselineheight * 1.5;
-    background-color: $primary;
+    background-color: $compcolor;
     border: solid 1px $primary;
     box-shadow: 1px 1px 4px $primary;
+    text-align: left;
+ 
 
     &--date {
       padding: $baselineheight;
@@ -46,7 +46,22 @@
       font-family: $basefont;
       font-size: fs(normal);
       color: $black;
-      font-weight: bold;
+      //font-weight: bold;
+      border-top: solid 5px $light;
+    }
+
+    &--priority{
+      padding: $baselineheight;
+      width: auto;
+      font-family: $basefont;
+      font-size: fs(small);
+      color: $light;
+      text-align: left;
+      background-color: $compcolor;
+
+      span{
+        font-weight: bold;
+      }
     }
 
     &__btns {
@@ -56,7 +71,6 @@
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      box-shadow: -1px -1px 4px $primary;
       border-left: solid 10px $light;
       &__icon--edit,
       &__icon--delete {
@@ -70,8 +84,7 @@
         }
       }
       &__icon--delete {
-        background-color: darken($compcolor, 5%);
-        color: $light;
+        color: $compcolor;
       }
     }
   }
@@ -82,4 +95,23 @@
   font-family: $altfont;
   font-size: fs(normal);
   text-align: center;
+}
+
+// options menu
+.options__menu{
+  display: flex;
+  justify-content: center;
+  padding: $baselineheight;
+  margin-bottom: $gutterwidth;
+  &__hidden--btn{
+    padding: $baselineheight;
+    font-family: $basefont;
+    font-size: fs(small);
+    color: $white;
+    background-color: $compcolor;
+
+    &--icon{
+      margin-left: $baselineheight;
+    }
+ }
 }

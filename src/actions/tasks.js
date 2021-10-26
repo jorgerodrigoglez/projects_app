@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 /************** NUEVO PROYECTO */
 
 // CREAMOS UN NUEVO PROYECTO EN LA BBDD
-export const newTask = (text, project, complete) => {
+export const newTask = (text, project, complete, priority) => {
   // el getState nos da acceso a todo el state de la app
   return async (dispatch, getState) => {
     //const state = getState();
@@ -19,6 +19,7 @@ export const newTask = (text, project, complete) => {
       text,
       idProject: project.id,
       complete,
+      priority,
       // hora actual
       date: new Date().getTime()
     };
@@ -122,17 +123,17 @@ export const setCheck = newComplete => ({
 });
 
 /************** GUARDAMOS LA TAREA EDITADA EN BBDD */
-export const startEditTask = task => {
+export const startEditTask = (newPriority,id) => {
   return async (dispatch, getState) => {
     // uid del user
     const { uid } = getState().auth;
 
     // eliminar el id de la nota que recibimos por parametro antes de grabarlo en la bbdd
-    const taskToFirebase = { ...task };
+    const taskToFirebase = { ...newPriority };
     delete taskToFirebase.id;
     // lamada a bbdd para realizar actualización
     await db
-      .doc(`${uid}/projects/tasks/${task.id}`)
+      .doc(`${uid}/projects/tasks/${newPriority.id}`)
       .update(taskToFirebase)
       .then(doc => {
         // mensaje de actualización
@@ -146,13 +147,16 @@ export const startEditTask = task => {
         );
       });
     // llamar a funcion para quitar la tarea que esta activa
-    dispatch(refreshTaskActive(task));
+    dispatch(refreshTaskActive(newPriority,id));
   };
 };
 // llamada el reducer para cambiar el activeTask de la tarea
-export const refreshTaskActive = task => ({
+export const refreshTaskActive = (task,id) => ({
   type: types.taskActiveReflesh,
-  payload: task
+  payload: {
+    id,
+    ...task
+  }
 });
 
 /** BORRA LA TAREA ACTUAL */

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // hook form
@@ -6,6 +7,8 @@ import { useForm } from "../../../hooks/useForm";
 import { removeError, setError } from "../../../actions/messages";
 // actions tasks
 import { newTask } from "../../../actions/tasks";
+// tasks - options - priorities
+import SelectPriorities from "./options/Priorities";
 
 export const FormAddTask = () => {
   // react-redux
@@ -17,10 +20,13 @@ export const FormAddTask = () => {
   // hook para captar valores de la tarea
   const [formValues, handleInputChange, reset] = useForm({
     text: "",
-    complete: false
+    complete: false,
   });
   // desestructuramos el objeto que retorna el hook
   const { text, complete } = formValues;
+  
+  // select priorities
+  const [selectPriorities, setSelectPriorities] = useState("Sin prioridad");
 
   //console.log(text);
   // funcion para validar y enviar la tarea a bbdd
@@ -30,7 +36,7 @@ export const FormAddTask = () => {
     // funcion para añadir tarea
     if (isFormTaskValid()) {
       //console.log(task);
-      dispatch(newTask(text, project, complete));
+      dispatch(newTask(text, project, complete, selectPriorities));
     }
     //limpia datos del formulario
     reset();
@@ -46,8 +52,18 @@ export const FormAddTask = () => {
     return true;
   };
 
+  // cambia el select de prioridades
+  const handlePriority = e => {
+    //console.log(e.currentTarget.dataset.value);
+    setSelectPriorities(e.currentTarget.dataset.value);
+  };
+
   return (
     <form className="form__task" onSubmit={handleTask}>
+      <SelectPriorities
+        selectPriorities={selectPriorities}
+        handlePriority={handlePriority}
+      />
       <input
         type="text"
         placeholder="Tarea"
@@ -58,8 +74,8 @@ export const FormAddTask = () => {
       />
       {/* Mensaje de error */}
       {msgError && <div className="auth__alert--error">{msgError}</div>}
-      <div className="form__task--btn">
-        <button>Añadir...</button>
+      <div className="form__task__btn">
+        <button className="form__task__btn--add">Añadir...</button>
       </div>
     </form>
   );
