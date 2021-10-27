@@ -21,9 +21,10 @@ export const FormAddTask = () => {
   const [formValues, handleInputChange, reset] = useForm({
     text: "",
     complete: false,
+    budget: 0,
   });
   // desestructuramos el objeto que retorna el hook
-  const { text, complete } = formValues;
+  const { text, complete, budget } = formValues;
   
   // select priorities
   const [selectPriorities, setSelectPriorities] = useState("Sin prioridad");
@@ -36,10 +37,12 @@ export const FormAddTask = () => {
     // funcion para añadir tarea
     if (isFormTaskValid()) {
       //console.log(task);
-      dispatch(newTask(text, project, complete, selectPriorities));
+      dispatch(newTask(text, project, complete, selectPriorities, budget));
     }
     //limpia datos del formulario
     reset();
+    //limpia select de categorias
+    setSelectPriorities("Sin prioridad");
   };
 
   // funcion para validar los campos del formulario
@@ -60,10 +63,11 @@ export const FormAddTask = () => {
 
   return (
     <form className="form__task" onSubmit={handleTask}>
+      
       <SelectPriorities
         selectPriorities={selectPriorities}
         handlePriority={handlePriority}
-      />
+        />
       <input
         type="text"
         placeholder="Tarea"

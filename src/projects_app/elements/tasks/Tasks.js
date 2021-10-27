@@ -2,6 +2,8 @@
 import { useSelector } from "react-redux";
 // elements
 import Task from "./Task";
+// elements - tasks - options
+import TotalBudgets from "./options/TotalBudgets";
 
 const Tasks = ({ showTasks }) => {
   //console.log(showTasks);
@@ -30,8 +32,15 @@ const Tasks = ({ showTasks }) => {
           Por el momento no hay tareas, empieza por crear una...
         </h2>
       )}
+      {/* Barra de total presupuestado */}
+      {tasks.length > 0 && (
+        <div className="tasks__total__budget">
+          {tasks.map((task, index) => (
+            <TotalBudgets key={task.id} tasks={tasks} index={index}/>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
-
 export default Tasks;

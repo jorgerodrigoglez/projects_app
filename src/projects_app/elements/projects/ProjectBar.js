@@ -62,13 +62,13 @@ export const ProjectBar = () => {
         {active && (
           <div className="bar__project__btn">
             <button className="bar__project__btn--edit" onClick={openModal}>
-              Editar
+              Editar proyecto
             </button>
             <button
               className="bar__project__btn--delete"
               onClick={handleDelete}
             >
-              Eliminar
+              Borrar proyecto
             </button>
           </div>
         )}

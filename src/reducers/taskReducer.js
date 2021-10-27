@@ -5,7 +5,8 @@ const initialState = {
   tasks: [],
   complete: false,
   activeTask: null,
-  priority: ""
+  priority: "",
+  budget: 0,
 };
 
 export const taskReducer = (state = initialState, action) => {
@@ -38,11 +39,12 @@ export const taskReducer = (state = initialState, action) => {
     case types.taskActiveReflesh:
       return {
         ...state,
-        activeTask: null,
+        activeTask: null
         /*tasks: state.tasks.map(task =>
           task.id === action.payload.id ? action.payload.task : task
         )*/
       };
+ 
     case types.taskDelete:
       return {
         ...state,

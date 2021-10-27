@@ -17,22 +17,36 @@ export const ProjectSelectedScreen = () => {
   const { activeTask: task, tasks } = useSelector(state => state.tasks);
   // para mostrar u ocultar tareas completadas
   const [showTasks, setShowTasks] = useState(true);
-  // para ocultar el boton si no hay tareas
+  // para mostrar el formulario para añadir una tarea o editar tareas
+  const [showForm, setShowForm] = useState(true);
 
   // muestra u oculta texto del boton de tareas completadas o no completadas
   const toggleTasks = () => {
     setShowTasks(!showTasks);
+  };
+  // cambia el texto del boton toggle
+  const handleText = () => {
+    setShowForm(!showForm);
   };
 
   return (
     <>
       <ModalToggle />
       <div className="project__header">
-        <h1 className="project__title__screen">{project.title}</h1>
+        <p className="project__header__note">** Para añadir y editar tareas el formulario debe estar abierto</p>
+        <h1 className="project__title__screen">
+          {project.title}
+          <div
+            className="project__title__screen--btn-form"
+            onClick={handleText}
+          >
+            {showForm ? "Mostrar formulario..." : "Ocultar formulario..."}
+          </div>
+        </h1>
         <p className="project__description__screen">{project.description}</p>
       </div>
       {/* Si la tarea esta activa - se activa desde el boton de editar - se muestra el formulario de edición sino se muestra el formulario de añadir tareas */}
-      {task ? <FormEditTask /> : <FormAddTask />}
+      {!showForm && (task ? <FormEditTask /> : <FormAddTask />)}
       {/* Menu opciones */}
       {tasks.length !== 0 ? (
         <OptionsTasks showTasks={showTasks} toggleTasks={toggleTasks} />

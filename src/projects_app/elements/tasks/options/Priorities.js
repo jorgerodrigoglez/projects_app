@@ -5,14 +5,15 @@ const SelectPriorities = ({ selectPriorities, handlePriority }) => {
   const [showSelect, setShowSelect] = useState(false);
 
   const priorities = [
-    { id: "Urgente", text: "Urgente"},
-    { id: "Alta", text: "Alta"},
-    { id: "Media", text: "Media"},
-    { id: "Baja", text: "Baja"}
+    { id: "Urgente", text: "Urgente" },
+    { id: "Alta", text: "Alta" },
+    { id: "Media", text: "Media" },
+    { id: "Baja", text: "Baja" }
   ];
 
   return (
     <div onClick={() => setShowSelect(!showSelect)} className="select__form">
+      <span className="select__form__title">Prioridad:</span>
       <div className="select__form__priorities">
         <div className="select__form__selected">
           {selectPriorities.toUpperCase()}
@@ -29,7 +30,6 @@ const SelectPriorities = ({ selectPriorities, handlePriority }) => {
                 {prioritie.text}
               </div>
             ))}
-          
           </div>
         )}
       </div>

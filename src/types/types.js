@@ -24,5 +24,5 @@ export const types = {
     taskActiveReflesh: '[Task] Eliminar la tarea activa',
     taskDelete: '[Task] Elimina una tarea especifica',
     tasksLogoutCleaning: '[Task] Logout limpia las tareas en memoria',
-    tasksProjectDelete: '[Tasks] Borra las tareas de un proyecto determinado'
+    tasksProjectDelete: '[Tasks] Borra las tareas de un proyecto determinado',
 }

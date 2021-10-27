@@ -1,7 +1,15 @@
 .project__header {
   @extend %center;
   width: 95%;
-  padding: $baselineheight;
+  padding: 0 $baselineheight;
+
+  &__note{
+    text-align: right;
+    margin-bottom: $baselineheight;
+    font-family: $altfont;
+    font-size: fs(x-small);
+    color: $black;
+  }
 }
 
 .bar__project {
@@ -11,7 +19,6 @@
   padding: $baselineheight;
   width: 98%;
   background-color: $primary;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,6 +48,7 @@
 
     &--edit,
     &--delete{
+      width: 120px;
       padding: $baselineheight * 1.25;
       font-family: $altfont;
       font-size: fs(small);
@@ -159,12 +167,27 @@
 
 
 .project__title__screen {
+  position: relative;
   padding: $baselineheight;
   text-align: center;
   background-color: $light;
   font-family: $basefont;
   font-size: fs(big);
   color: $black;
+
+  &--btn-form{
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 200px;
+    padding: $baselineheight / 2;
+    font-family: $altfont;
+    font-weight: bold;
+    font-size: fs(small);
+    background-color: $light;
+    border: solid 1px $black;
+    cursor: pointer;
+  }
 }
 
 .project__description__screen {

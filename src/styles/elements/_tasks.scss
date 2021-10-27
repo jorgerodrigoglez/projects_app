@@ -1,6 +1,33 @@
 .tasks {
   @extend %center;
   width: 100%;
+
+  &__total__budget{
+    @extend %center;
+    margin-top: $gutterwidth;
+    margin-bottom: $gutterwidth;
+    padding: $baselineheight;
+    width: 80%;
+    color: $black;
+    border: solid 1px $black;
+    display: block;
+  }
+}
+.budget__bar{
+  @extend %center;
+  width: 200px;
+  background-color: $primary;
+  
+  &__text{
+    padding: 0;
+    font-family: $codefont;
+    text-align: center;
+    span{
+      font-family: $codefont;
+      font-size: fs(small) * 1.1;
+      font-weight: bold;
+    }
+  }
 }
 
 .task {
@@ -14,11 +41,11 @@
     padding: $gutterwidth;
     margin-right: $baselineheight;
     cursor: pointer;
-    
+
     &--check {
-        padding: $baselineheight / 1.5;
-        font-size: fs(big);
-        background-color: #fff;
+      padding: $baselineheight / 1.5;
+      font-size: fs(big);
+      background-color: $white;
     }
   }
   &__dates {
@@ -30,7 +57,6 @@
     border: solid 1px $primary;
     box-shadow: 1px 1px 4px $primary;
     text-align: left;
- 
 
     &--date {
       padding: $baselineheight;
@@ -43,24 +69,93 @@
 
     &--name {
       padding: $baselineheight * 1.5;
-      font-family: $basefont;
+      font-family: $altfont;
       font-size: fs(normal);
       color: $black;
       //font-weight: bold;
       border-top: solid 5px $light;
     }
 
-    &--priority{
-      padding: $baselineheight;
+    &--expense {
+      width: 100%;
+      padding: $baselineheight 0;
+      text-align: right;
+      background-color: $primary;
+
+      &--group{
+        display: inline-block;
+        vertical-align: middle;
+
+        &--title{
+          margin-right: $baselineheight;
+          display: inline-block;
+          font-family: $altfont;
+          font-size: fs(small);
+          font-weight: bold;
+          color: $black;
+        }
+
+        input[type=number]{
+          width: 50px;
+          background-color: $primary;
+          border: solid 1px $black;
+          font-family: $altfont;
+          font-size: fs(small);
+          color: $black;
+
+        }
+
+        &--text{
+          padding: $baselineheight;
+          margin-right: $baselineheight / 2;
+          width: 70px;
+          font-family: $altfont;
+          font-size: fs(small);
+          color: $black;
+          font-weight: bold;
+          background-color: $compcolor;
+          border: none
+        }
+  
+        &--btn{
+          padding: $baselineheight;
+          font-family: $altfont;
+          font-weight: bold;
+          font-size: fs(small);
+          color: $black;
+          background-color: $primary;
+        }
+      }
+
+    }
+
+    &--priority {
+      display: flex;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: flex-end;
+      padding-top: $baselineheight;
+      padding-bottom: $baselineheight * 1.25;
       width: auto;
-      font-family: $basefont;
-      font-size: fs(small);
-      color: $light;
-      text-align: left;
       background-color: $compcolor;
 
-      span{
+      &--input{
+        padding: $baselineheight / 2;
+        margin-left: $baselineheight;
+        width: 100px;
+        font-family: $altfont;
+        font-size: fs(small);
+        color: $black;
         font-weight: bold;
+        background-color: $compcolor;
+        border: none;
+        border: dashed 1px $black;
+      }
+
+      &--btn{
+        font-size: fs(normal);
+        background-color: $compcolor;
+        cursor: pointer;
       }
     }
 
@@ -91,27 +186,32 @@
 }
 
 .msg__no__tasks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: $gutterwidth * 2;
   font-family: $altfont;
   font-size: fs(normal);
   text-align: center;
+  
 }
 
 // options menu
-.options__menu{
+.options__menu {
   display: flex;
   justify-content: center;
   padding: $baselineheight;
   margin-bottom: $gutterwidth;
-  &__hidden--btn{
+  &__hidden--btn {
     padding: $baselineheight;
     font-family: $basefont;
     font-size: fs(small);
     color: $white;
     background-color: $compcolor;
 
-    &--icon{
+    &--icon {
       margin-left: $baselineheight;
     }
- }
+  }
 }

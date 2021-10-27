@@ -24,7 +24,7 @@ export const FormEditTask = () => {
   const [formValues, handleInputChange, reset] = useForm(task);
   // desestructuramos el objeto que retorna el hook
   const { text, idProject, priority } = formValues;
-  console.log(text, idProject, priority);
+  //console.log(text, idProject, priority);
 
   // select priorities
   const [selectPriorities, setSelectPriorities] = useState(priority);

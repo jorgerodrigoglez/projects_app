@@ -8,7 +8,8 @@ import Swal from "sweetalert2";
 /************** NUEVO PROYECTO */
 
 // CREAMOS UN NUEVO PROYECTO EN LA BBDD
-export const newTask = (text, project, complete, priority) => {
+export const newTask = (text, project, complete, priority, budget) => {
+  //console.log(text, project, complete, priority, budget);
   // el getState nos da acceso a todo el state de la app
   return async (dispatch, getState) => {
     //const state = getState();
@@ -20,6 +21,7 @@ export const newTask = (text, project, complete, priority) => {
       idProject: project.id,
       complete,
       priority,
+      budget,
       // hora actual
       date: new Date().getTime()
     };
@@ -93,8 +95,8 @@ export const setTasksProject = tasksProject => ({
   payload: tasksProject
 });
 
-/** INPUT CHECK DE CADA TAREA*/
-export const setTaskCheck = (id, task, newComplete) => {
+/** INPUT CHECK Y NUMBER DE CADA TAREA*/
+export const setTaskCheckChange = (id, task, newInput) => {
   return async (dispatch, getState) => {
     //console.log(task, newComplete);
     // uid del usuario
@@ -102,7 +104,7 @@ export const setTaskCheck = (id, task, newComplete) => {
     //se envía el valor a la BBDD
     await db
       .doc(`${uid}/projects/tasks/${id}`)
-      .update(newComplete)
+      .update(newInput)
       .then(() => {
         console.log("La tarea fue editada con exito");
       })
@@ -110,20 +112,20 @@ export const setTaskCheck = (id, task, newComplete) => {
         console.log(err);
       });
     // llamada al reducer para cambiar el state de tasks complete
-    dispatch(setCheck(newComplete));
+    dispatch(setCheck(newInput));
     // refrescar tareas del proyecto seleccionado
     dispatch(startLoadingTasksProject(task.idProject));
   };
 };
 
 // llamada el reducer para cambiar el check de la tarea
-export const setCheck = newComplete => ({
+export const setCheck = newInput => ({
   type: types.taskCheck,
-  payload: newComplete
+  payload: newInput
 });
 
 /************** GUARDAMOS LA TAREA EDITADA EN BBDD */
-export const startEditTask = (newPriority,id) => {
+export const startEditTask = (newPriority, id) => {
   return async (dispatch, getState) => {
     // uid del user
     const { uid } = getState().auth;
@@ -147,11 +149,11 @@ export const startEditTask = (newPriority,id) => {
         );
       });
     // llamar a funcion para quitar la tarea que esta activa
-    dispatch(refreshTaskActive(newPriority,id));
+    dispatch(refreshTaskActive(newPriority, id));
   };
 };
 // llamada el reducer para cambiar el activeTask de la tarea
-export const refreshTaskActive = (task,id) => ({
+export const refreshTaskActive = (task, id) => ({
   type: types.taskActiveReflesh,
   payload: {
     id,
